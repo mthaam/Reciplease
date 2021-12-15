@@ -1,0 +1,33 @@
+//
+//  SearchResultListViewController.swift
+//  Reciplease
+//
+//  Created by SEBASTIEN BRUNET on 10/12/2021.
+//
+
+import UIKit
+
+class SearchResultListViewController: UIViewController {
+    
+    @IBOutlet weak var recipeTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        recipeTableView.dataSource = self
+    }
+}
+
+extension SearchResultListViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
+        return cell
+    }
+}
