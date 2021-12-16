@@ -42,5 +42,13 @@ class FridgeIngredients {
         list.removeAll()
         listWithComma.removeAll()
     }
+
+    func getAllIngredientsIntoOneString() -> String {
+        var all = ""
+        for ingredient in listWithComma {
+            all.append(ingredient)
+        }
+        return all
+    }
     
 }

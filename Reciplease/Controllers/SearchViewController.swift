@@ -45,6 +45,23 @@ extension SearchViewController {
     /// This function fetch recipes,
     /// using Alamofire.
     private func fetchRecipes() {
+        let ingredientsAsOneString = ingredients.getAllIngredientsIntoOneString()
+        let url = "https://api.edamam.com/api/recipes/v2"
+        var parameters: [String: String] = [:]
+        parameters["app_key"] =  "63842f43146f8483807ee9115dbfbc43"
+        parameters["type"] =  "public"
+        parameters["app_id"] =  "64c8a528"
+        parameters["q"] =  "\(ingredientsAsOneString)"
+        parameters["imageSize"] =  "LARGE"
+        parameters["imageSize"] =  "REGULAR"
+        let request = AF.request(url, parameters: parameters)
+            .validate()
+        request.responseJSON { (data) in
+            print(data)
+        }
+    
+        
+        
         
     }
 
