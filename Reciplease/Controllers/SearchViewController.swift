@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     var ingredients = FridgeIngredients()
     var recipeData: RecipeData!
     
+    
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var textField: UITextField!
@@ -69,17 +70,12 @@ extension SearchViewController {
         RecipeService.shared.fetchRecipes(with: ingredientsAsOneString) { result in
             switch result {
             case .success(let allRecipes):
-                print("it worked!")
                 self.recipeData = allRecipes
                 self.toggleActivityIndicator(shown: false)
-                //
-//                print("!!!%%% \(self.recipeData?.hits[0].recipe.label) %%%!!!")
                 self.performSegue(withIdentifier: "segueToRecipesList", sender: nil)
             case .failure(let error):
                 self.toggleActivityIndicator(shown: false)
                 self.presentAlert(withMessage: "Unable to find recipes with listed ingredients.")
-                //
-                print("something went wrong!")
                 print(error.localizedDescription)
             }
         }

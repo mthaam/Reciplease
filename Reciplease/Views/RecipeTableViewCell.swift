@@ -20,7 +20,6 @@ class RecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         makeRoundCornersToLikeAndCookingViews()
-    
     }
 
     private func makeRoundCornersToLikeAndCookingViews() {
@@ -41,5 +40,18 @@ class RecipeTableViewCell: UITableViewCell {
         } else {
             numberOfLIkesLabel.text = "👍 N/A"
         }
+        guard let imageURL = recipe.recipe.image else {
+            let image = UIImage(imageLiteralResourceName: "default_hamburger")
+            recipeImage.image = image
+            return
+        }
+        guard let url = URL(string: imageURL) else {
+            let image = UIImage(imageLiteralResourceName: "default_hamburger")
+            recipeImage.image = image
+            return
+        }
+        recipeImage.af.setImage(withURL: url)
+        
     }
+    
 }

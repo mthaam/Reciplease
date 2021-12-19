@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class RecipeService {
     
@@ -28,9 +29,6 @@ class RecipeService {
             completion(.failure(.noInputIngredients))
             return
         }
-        print("\(ingredients)")
-        
-        // v1
         parameters["app_key"] =  app_key
         parameters["type"] =  "public"
         parameters["app_id"] =  app_id
@@ -47,6 +45,5 @@ class RecipeService {
                 }
             }
     }
-    
-    
+
 }

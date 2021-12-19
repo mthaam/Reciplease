@@ -33,26 +33,9 @@ struct Hit: Decodable {
 
 struct Recipe: Decodable {
     let label: String
-//    let images: ImageObject
     let image: String?
     let url: String
     let ingredientLines: [String]
     let totalTime: Double?
     let yield: Float?
 }
-
-protocol Displayable {
-    var titleLabelText: String { get }
-}
-
-//struct ImageObject: Decodable {
-//    let regular: Regular?
-//    let large: Large?
-//}
-//struct Regular: Decodable {
-//    let url: String
-//}
-//
-//struct Large: Decodable {
-//    let url: String
-//}

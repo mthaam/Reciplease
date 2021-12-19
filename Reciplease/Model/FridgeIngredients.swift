@@ -15,9 +15,6 @@ class FridgeIngredients {
         var elements: [String] {
             return items.split(separator: ",").map { "\($0)" }
         }
-//        var elementsWithComma: [String] {
-//            return items.split(separator: " ").map { "\($0)" }
-//        }
         for element in elements { list.append(element) }
         var count = 0
         for item in list {
@@ -42,9 +39,6 @@ class FridgeIngredients {
     func getAllIngredientsIntoOneString() -> String {
         var all = ""
         all = list.joined(separator: ",")
-        //
-        #warning("comment")
-        print(all)
         return all
     }
     
