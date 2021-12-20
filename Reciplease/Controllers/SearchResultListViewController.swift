@@ -11,7 +11,7 @@ class SearchResultListViewController: UIViewController {
     
     var recipeData: RecipeData?
     var recipeToPrepareForSegue: Recipe!
-    var recipeImages: UIImage?
+    var recipeImageToPrepareForSegue: UIImage?
     
     @IBOutlet weak var recipeTableView: UITableView!
     
@@ -20,16 +20,22 @@ class SearchResultListViewController: UIViewController {
         recipeTableView.dataSource = self
         recipeTableView.delegate = self
     }
+    
+}
 
+extension SearchResultListViewController {
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipeDetail" {
             let destinationVC = segue.destination as! RecipeViewController
             destinationVC.recipe = recipeToPrepareForSegue
         }
     }
+    
 }
 
 extension SearchResultListViewController: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

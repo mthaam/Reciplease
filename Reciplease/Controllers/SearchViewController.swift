@@ -33,14 +33,6 @@ class SearchViewController: UIViewController {
         ingredientsTableView.reloadData()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToRecipesList" {
-            let destinationVC = segue.destination as! SearchResultListViewController
-            destinationVC.recipeData = recipeData
-        }
-      
-    }
-
     @IBAction func search(_ sender: Any) {
         fetchRecipes()
     }
@@ -56,6 +48,17 @@ class SearchViewController: UIViewController {
     @IBAction func testSearch(_ sender: Any) {
         fetchRecipes()
     }
+}
+
+extension SearchViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToRecipesList" {
+            let destinationVC = segue.destination as! SearchResultListViewController
+            destinationVC.recipeData = recipeData
+        }
+    }
+    
 }
 
 extension SearchViewController {

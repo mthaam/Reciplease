@@ -20,6 +20,7 @@ class RecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         makeRoundCornersToLikeAndCookingViews()
+//        addGradient()
     }
 
     private func makeRoundCornersToLikeAndCookingViews() {
@@ -28,12 +29,13 @@ class RecipeTableViewCell: UITableViewCell {
     }
 
     func configure(with recipe: Hit) {
+        
         recipeName.text = recipe.recipe.label
         ingredientsListLabel.text = recipe.recipe.ingredientLines.joined(separator: ", ")
-        if let cookingTime = recipe.recipe.totalTime {
+        if let cookingTime = recipe.recipe.totalTime, cookingTime != 0.0 {
             cookingTimeLabel.text = "🕓 \(Int(cookingTime)) mn"
         } else {
-            cookingTimeLabel.text = "🕓 unknown"
+            cookingTimeLabel.text = "🕓 N/A"
         }
         if let likes = recipe.recipe.yield {
             numberOfLIkesLabel.text = "🏆 \(likes)"
@@ -50,8 +52,19 @@ class RecipeTableViewCell: UITableViewCell {
             recipeImage.image = image
             return
         }
+        addGradient()
         recipeImage.af.setImage(withURL: url)
-        
+    }
+
+    private func addGradient() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: frame.height)
+        gradientLayer.type = .axial
+        gradientLayer.colors = [UIColor.black.withAlphaComponent(0).cgColor,
+                                UIColor.black.withAlphaComponent(0.7).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.2)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        recipeImage.layer.addSublayer(gradientLayer)
     }
     
 }

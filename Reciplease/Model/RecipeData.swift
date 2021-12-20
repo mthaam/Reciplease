@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct RecipeData: Decodable {
     let count: Int
     let links: Links?
