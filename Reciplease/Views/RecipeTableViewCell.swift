@@ -20,7 +20,6 @@ class RecipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         makeRoundCornersToLikeAndCookingViews()
-//        addGradient()
     }
 
     private func makeRoundCornersToLikeAndCookingViews() {

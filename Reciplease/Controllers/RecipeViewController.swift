@@ -10,6 +10,7 @@ import UIKit
 class RecipeViewController: UIViewController {
     
     var recipe: Recipe!
+    let coreDataManagement = FavouritesCoreDataManager.sharedFavoritesCoreDataManager
     
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var recipeTitleLabel: UILabel!
@@ -18,6 +19,7 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var greyView: UIView!
     @IBOutlet weak var blackView: UIView!
+    @IBOutlet weak var favouriteStarIcon: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,38 @@ class RecipeViewController: UIViewController {
         updateLabels()
         makeRoundCornersToLikeAndCookingViews()
     }
+    
+    @IBAction func saveRecipe(_ sender: Any) {
+        saveRecipeObject()
+    }
+    
+}
 
+extension RecipeViewController {
+    
+    private func saveRecipeObject() {
+        coreDataManagement.saveRecipeObject(with: recipe) { success in
+            if success {
+                favouriteStarIcon.tintColor = .recipleaseGreen
+            } else {
+                presentAlert(withMessage: "Unable to add this recipe to favorites.")
+            }
+        }
+    }
+    
+}
+
+extension RecipeViewController {
+    
+    /// This function displays an alert to user.
+    /// - Parameter withMessage : A string value, which
+    /// is the message displayed in case of an Alert.
+    private func presentAlert(withMessage: String) {
+        let alertViewController = UIAlertController(title: "Warning", message: withMessage, preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertViewController, animated: true, completion: nil)
+    }
+    
 }
 
 extension RecipeViewController {
@@ -47,13 +80,11 @@ extension RecipeViewController {
     }
     
     private func updatePicture() {
-        
         guard let imageURL = recipe.image else {
             let image = UIImage(imageLiteralResourceName: "default_hamburger")
             recipeImage.image = image
             return
         }
-        
         guard let url = URL(string: imageURL) else {
             let image = UIImage(imageLiteralResourceName: "default_hamburger")
             recipeImage.image = image
@@ -62,12 +93,12 @@ extension RecipeViewController {
         recipeImage.af.setImage(withURL: url)
         addGradient()
     }
-
+    
     private func makeRoundCornersToLikeAndCookingViews() {
         greyView.layer.cornerRadius = 10
         blackView.layer.cornerRadius = 10
     }
-
+    
     private func addGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: recipeImage.bounds.height)
@@ -78,6 +109,7 @@ extension RecipeViewController {
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         recipeImage.layer.addSublayer(gradientLayer)
     }
+    
 }
 
 extension RecipeViewController: UITableViewDataSource {
@@ -100,4 +132,5 @@ extension RecipeViewController: UITableViewDataSource {
         
         return cell
     }
+    
 }

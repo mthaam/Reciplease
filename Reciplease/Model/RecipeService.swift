@@ -10,6 +10,7 @@ import Alamofire
 import AlamofireImage
 
 class RecipeService {
+//    private init() {}
     
     private let url = "https://api.edamam.com/api/recipes/v2"
     private var parameters: [String: String] = [:]

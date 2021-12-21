@@ -33,10 +33,10 @@ struct Hit: Decodable {
 }
 
 struct Recipe: Decodable {
-    let label: String
-    let image: String?
-    let url: String
-    let ingredientLines: [String]
-    let totalTime: Double?
-    let yield: Float?
+    var label: String
+    var image: String?
+    var url: String
+    var ingredientLines: [String]
+    var totalTime: Double?
+    var yield: Float?
 }
