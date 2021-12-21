@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RecipeViewController: UIViewController {
     
@@ -25,16 +26,31 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
         ingredientsTableView.dataSource = self
         updateLabels()
+        favouriteStarIcon.tintColor = .lightGray
+        checkIfRecipeIsAlreadyFavourite()
         makeRoundCornersToLikeAndCookingViews()
     }
     
     @IBAction func saveRecipe(_ sender: Any) {
-        saveRecipeObject()
+        removeOrSaveRecipe()
+    }
+
+    @IBAction func openRecipeWebPage(_ sender: Any) {
+        showRecipeWebPage()
     }
     
 }
 
 extension RecipeViewController {
+
+    private func removeOrSaveRecipe() {
+        
+        if favouriteStarIcon.tintColor == .lightGray {
+            saveRecipeObject()
+        } else {
+            unsaveRecipeObject()
+        }
+    }
     
     private func saveRecipeObject() {
         coreDataManagement.saveRecipeObject(with: recipe) { success in
@@ -42,6 +58,24 @@ extension RecipeViewController {
                 favouriteStarIcon.tintColor = .recipleaseGreen
             } else {
                 presentAlert(withMessage: "Unable to add this recipe to favorites.")
+            }
+        }
+    }
+
+    private func unsaveRecipeObject() {
+        coreDataManagement.deleteRecipe(with: recipe) { success in
+            if success {
+                favouriteStarIcon.tintColor = .lightGray
+            } else {
+                presentAlert(withMessage: "Unable to delete this recipe from favorites.")
+            }
+        }
+    }
+
+    private func checkIfRecipeIsAlreadyFavourite() {
+        for rec in coreDataManagement.all {
+            if let url = rec.url, url == recipe.url {
+                favouriteStarIcon.tintColor = .recipleaseGreen
             }
         }
     }
@@ -57,6 +91,18 @@ extension RecipeViewController {
         let alertViewController = UIAlertController(title: "Warning", message: withMessage, preferredStyle: .alert)
         alertViewController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertViewController, animated: true, completion: nil)
+    }
+
+    private func showRecipeWebPage() {
+        guard let recipeURL = URL(string: recipe.url) else {
+            presentAlert(withMessage: "Unable to load recipe web page.")
+            return
+        }
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        
+        let safariVC = SFSafariViewController(url: recipeURL, configuration: config)
+        present(safariVC, animated: true)
     }
     
 }

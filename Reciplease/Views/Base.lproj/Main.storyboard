@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.91146761178970337" green="0.39219909906387329" blue="0.38404625654220581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <tabBarAppearance key="standardAppearance">
                             <color key="backgroundColor" red="0.91146761178970337" green="0.39219909906387329" blue="0.38404625654220581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="selectionIndicatorTintColor" red="0.32377681139999998" green="0.58958905939999995" blue="0.41605708000000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -359,38 +359,6 @@
             </objects>
             <point key="canvasLocation" x="975" y="1233"/>
         </scene>
-        <!--Favourite Recipe Directions View Controller-->
-        <scene sceneID="hRQ-zG-Dp2">
-            <objects>
-                <viewController id="yTx-f9-tOh" customClass="FavouriteRecipeDirectionsViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CEp-zF-mXD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-ag-zIH">
-                                <rect key="frame" x="16" y="52" width="288" height="459"/>
-                                <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="FCG-Gz-nqQ"/>
-                        <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="FCG-Gz-nqQ" firstAttribute="trailing" secondItem="hgB-ag-zIH" secondAttribute="trailing" constant="16" id="174-KP-x4I"/>
-                            <constraint firstItem="FCG-Gz-nqQ" firstAttribute="bottom" secondItem="hgB-ag-zIH" secondAttribute="bottom" constant="8" id="HVY-h6-Ylt"/>
-                            <constraint firstItem="hgB-ag-zIH" firstAttribute="top" secondItem="FCG-Gz-nqQ" secondAttribute="top" constant="8" id="Wtd-3i-GDC"/>
-                            <constraint firstItem="hgB-ag-zIH" firstAttribute="leading" secondItem="FCG-Gz-nqQ" secondAttribute="leading" constant="16" id="nQa-ht-jlT"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="PyN-9m-amE"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jsT-9V-QBy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="975" y="2905"/>
-        </scene>
         <!--Reciplease-->
         <scene sceneID="tc2-7P-e5l">
             <objects>
@@ -559,7 +527,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="mc4-Y3-vfD" kind="show" id="Gyw-d5-U0q"/>
+                                    <action selector="openRecipeWebPage:" destination="iRK-Ck-Jbh" eventType="touchUpInside" id="Zjn-hP-uHr"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5KX-o2-YIu">
@@ -747,38 +715,6 @@
             </objects>
             <point key="canvasLocation" x="975" y="469"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Toa-t1-vJF">
-            <objects>
-                <viewController id="mc4-Y3-vfD" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0n8-1F-GVY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jle-jj-337">
-                                <rect key="frame" x="16" y="52" width="288" height="459"/>
-                                <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="T8l-EQ-feH"/>
-                        <color key="backgroundColor" red="0.1019607931" green="0.1019607931" blue="0.1019607931" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="Jle-jj-337" firstAttribute="top" secondItem="T8l-EQ-feH" secondAttribute="top" constant="8" id="3Hd-5m-wnQ"/>
-                            <constraint firstItem="Jle-jj-337" firstAttribute="leading" secondItem="T8l-EQ-feH" secondAttribute="leading" constant="16" id="ir4-pP-miU"/>
-                            <constraint firstItem="T8l-EQ-feH" firstAttribute="trailing" secondItem="Jle-jj-337" secondAttribute="trailing" constant="16" id="ng0-MO-rz7"/>
-                            <constraint firstItem="T8l-EQ-feH" firstAttribute="bottom" secondItem="Jle-jj-337" secondAttribute="bottom" constant="8" id="rLh-pa-GPH"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Dt1-92-fTG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="41T-Em-fb5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1374" y="3579"/>
-        </scene>
         <!--Favourite Recipes View Controller-->
         <scene sceneID="f0b-Az-a14">
             <objects>
@@ -799,7 +735,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="yTx-f9-tOh" kind="show" id="ie7-VC-c5v"/>
+                                    <action selector="openRecipeWebPage:" destination="ZCV-Bt-3Xe" eventType="touchUpInside" id="WeG-GZ-SlS"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="IVR-1s-o6D">

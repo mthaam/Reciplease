@@ -10,7 +10,7 @@ import Alamofire
 import AlamofireImage
 
 class RecipeService {
-//    private init() {}
+    private init() {}
     
     private let url = "https://api.edamam.com/api/recipes/v2"
     private var parameters: [String: String] = [:]
@@ -18,7 +18,7 @@ class RecipeService {
     private let app_id =  "64c8a528"
     
     static let shared = RecipeService()
-    var session: Session
+    var session: Session = Session(configuration: .default)
 
     init(session: Session = .default) {
         self.session = session
