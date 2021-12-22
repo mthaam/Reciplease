@@ -48,12 +48,12 @@ extension SearchResultListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCellTableViewCell else {
             return UITableViewCell()
         }
         guard let recipe = recipeData?.hits[indexPath.row] else { return cell }
 
-        cell.configure(with: recipe)
+        cell.xibRecipeView.recipe = recipe
         
         return cell
     }

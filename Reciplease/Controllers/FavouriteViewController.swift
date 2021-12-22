@@ -69,13 +69,13 @@ extension FavouriteViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCellTableViewCell else {
             return UITableViewCell()
         }
         let recipe = recipesToDisplay[indexPath.row]
         let hit = Hit(recipe: recipe)
 
-        cell.configure(with: hit)
+        cell.xibRecipeView.recipe = hit
         
         return cell
     }
