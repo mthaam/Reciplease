@@ -21,10 +21,12 @@ class FavouritesCoreDataManager {
     var all: [RecipeObject] {
         let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
         request.sortDescriptors = [
-        NSSortDescriptor(key: "label", ascending: true)]
-        guard let recipes = try? AppDelegate.viewContext.fetch(request) else {
-            return [] }
-        return recipes
+            NSSortDescriptor(key: "label", ascending: true)]
+        var recipeObjects: [RecipeObject] = []
+        if let recipes = try? recipleaseContext.fetch(request) {
+            recipeObjects = recipes
+        }
+        return recipeObjects
     }
     
     func saveRecipeObject(with recipe: Recipe!, completion: (Bool) -> Void) {
@@ -43,31 +45,24 @@ class FavouritesCoreDataManager {
             recipeObject.yield = yield
         }
         recipeObject.ingredientLines = recipe.ingredientLines.joined(separator: " = ")
-        do {
-            try AppDelegate.viewContext.save()
-            completion(true)
-        } catch let error {
-            completion(false)
-            print(error.localizedDescription)
-        }
+        
+        try? recipleaseContext.save()
+        completion(true)
     }
-
+    
     func deleteRecipe(with recipeToDelete: Recipe!, completion: (Bool) -> Void) {
         let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
         
-        if let recipes = try? AppDelegate.viewContext.fetch(request) {
+        if let recipes = try? recipleaseContext.fetch(request) {
             for recipe in recipes {
                 if recipe.url == recipeToDelete.url {
                     recipleaseContext.delete(recipe)
                 }
             }
         }
-        do {
-            try AppDelegate.viewContext.save()
-            completion(true)
-        } catch let error {
-            completion(false)
-            print(error.localizedDescription)
-        }
+        
+        try? recipleaseContext.save()
+        completion(true)
+        
     }
 }

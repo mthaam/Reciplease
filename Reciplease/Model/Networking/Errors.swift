@@ -12,5 +12,8 @@ import AlamofireImage
 enum NetworkError: Error {
     case noData
     case noInputIngredients
+    case unableToSetUrl
+    case badResponse
+    case unableToDecodeResponse
     case alamofireError(AFError)
 }
