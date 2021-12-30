@@ -8,7 +8,15 @@
 import Foundation
 import CoreData
 
-class FavouritesCoreDataManager {
+/// This class is used to manage CRUD operations
+/// in core data for RecipeObject objects.
+/// - Note that the shared static let
+/// is used for singleton pattern and uses
+/// app's context.
+/// - Note that an instance of this class can
+/// be initialized with a different context for testing
+/// purposes.
+final class FavouritesCoreDataManager {
     
     static let sharedFavoritesCoreDataManager = FavouritesCoreDataManager(context: AppDelegate.viewContext)
     
@@ -18,6 +26,8 @@ class FavouritesCoreDataManager {
         self.recipleaseContext = context
     }
     
+    /// This var fetches all RecipeObjects entities store in
+    /// core data.
     var all: [RecipeObject] {
         let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
         request.sortDescriptors = [
@@ -29,6 +39,10 @@ class FavouritesCoreDataManager {
         return recipeObjects
     }
     
+    /// This function saves new RecipeObject in core data.
+    /// - Parameter recipe : a Recipe object to save.
+    /// - Parameter completion : a closure return
+    /// a bool value.
     func saveRecipeObject(with recipe: Recipe!, completion: (Bool) -> Void) {
         let recipeObject = RecipeObject(context: recipleaseContext)
         guard recipe != nil else { completion(false)
@@ -50,6 +64,10 @@ class FavouritesCoreDataManager {
         completion(true)
     }
     
+    /// This function deletes a recipe stored in core data.
+    /// - Parameter recipe : a Recipe object to save.
+    /// - Parameter completion : a closure return
+    /// a bool value.
     func deleteRecipe(with recipeToDelete: Recipe!, completion: (Bool) -> Void) {
         let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
         

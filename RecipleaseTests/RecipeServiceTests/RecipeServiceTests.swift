@@ -8,8 +8,12 @@
 import XCTest
 @testable import Reciplease
 
+// - MARK: CLASS
+
 class RecipeServiceTests: XCTestCase {
 
+    // - MARK: TESTING FUNCTIONS
+    
     func testGivenThereAreNoIngredientsToSearch_WhenFetchingRecipes_CompletionShouldReturnNoInputIngredientsError() {
         let mockSession = MockRecipeSession(mockResponse: MockResponse(response: nil, data: nil))
         let recipeSession = RecipeService(session: mockSession)

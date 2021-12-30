@@ -7,8 +7,16 @@
 
 import UIKit
 
+/// This class defines a view to be used
+/// as a factorized cell view in a search result
+/// view controller.
 class XibRecipeTableViewCell: UIView {
 
+    // - MARK: RECIPE OBJECT
+    
+    /// This var receives a recipe object whenever
+    /// a cell is created, and sets up sub views once
+    /// self changes value.
     var recipe: Hit! {
         didSet {
             recipeName.text = recipe.recipe.label
@@ -38,6 +46,8 @@ class XibRecipeTableViewCell: UIView {
         }
     }
 
+    // - MARK: OUTLETS
+    
     @IBOutlet var mainView: UIView!
     @IBOutlet var contentVIew: UIView!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -47,6 +57,8 @@ class XibRecipeTableViewCell: UIView {
     @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var ingredientsListLabel: UILabel!
+    
+    // - MARK: INITS
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,6 +71,11 @@ class XibRecipeTableViewCell: UIView {
         commonInit()
     }
     
+    // - MARK: FUNCTIONS
+    
+    /// This function is called at cell build,
+    /// either done in storyboard or code
+    /// in inits above.
     private func commonInit() {
         Bundle.main.loadNibNamed("XibRecipeTableViewCell", owner: self, options: nil)
         addSubview(mainView)
@@ -67,11 +84,14 @@ class XibRecipeTableViewCell: UIView {
         makeRoundCornersToLikeAndCookingViews()
     }
 
+    /// This function makes round corners to top left
+    /// subview displaying cooking time and rating.
     private func makeRoundCornersToLikeAndCookingViews() {
         greyview.layer.cornerRadius = 10
         blackView.layer.cornerRadius = 10
     }
 
+    /// This function adds a clear to black gradient to recipe image
     private func addGradient() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: frame.height)

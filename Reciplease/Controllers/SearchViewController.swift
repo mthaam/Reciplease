@@ -8,31 +8,25 @@
 import UIKit
 import Alamofire
 
+// - MARK: CLASS
+
 class SearchViewController: UIViewController {
+    
+    // - MARK: PROPERTIES
     
     var ingredientsList: [String] = []
     var ingredients = FridgeIngredients()
     var recipeData: RecipeData!
     
+    // - MARK: OUTLETS
     
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var textField: UITextField!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    // - MARK: @IBACTIONS
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ingredientsTableView.dataSource = self
-        textField.delegate = self
-        toggleActivityIndicator(shown: false)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ingredientsTableView.reloadData()
-    }
-
     @IBAction func search(_ sender: Any) {
         fetchRecipes()
     }
@@ -50,7 +44,21 @@ class SearchViewController: UIViewController {
     }
 }
 
+// - MARK: FUNCTIONS OVERRIDES
+
 extension SearchViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ingredientsTableView.dataSource = self
+        textField.delegate = self
+        toggleActivityIndicator(shown: false)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ingredientsTableView.reloadData()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToRecipesList" {
@@ -60,6 +68,9 @@ extension SearchViewController {
     }
     
 }
+
+
+// - MARK: FUNCTIONS
 
 extension SearchViewController {
     
@@ -106,11 +117,16 @@ extension SearchViewController {
         ingredientsTableView.reloadData()
     }
 
+    /// This function toggles activity indicator
+    ///  and hides button while fetching data.
     private func toggleActivityIndicator(shown: Bool) {
         activityIndicator.isHidden = !shown
         searchButton.isHidden = shown
     }
 }
+
+
+// - MARK: ALERTS
 
 extension SearchViewController {
 
@@ -124,15 +140,25 @@ extension SearchViewController {
     }
 }
 
+// - MARK: TABLE VIEW DATA SOURCE PROTOCOL FUNCTIONS
+
 extension SearchViewController: UITableViewDataSource {
+    
+    /// This function returns an Int value,
+    /// defining the number of sections within the
+    /// table view.
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    /// This function returns an Int value,
+    /// defining the number of rows in section.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredients.list.count
     }
     
+    /// This function returns a UITableVIewCell,
+    /// containing an ingredient in list variable.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientTableViewCell else {
             return UITableViewCell()
@@ -144,6 +170,7 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+// - MARK: TEXT FIELD DELEGATE FUNCTION
 
 extension SearchViewController: UITextFieldDelegate {
     
@@ -155,8 +182,13 @@ extension SearchViewController: UITextFieldDelegate {
     }
 }
 
+// - MARK: TABLE VIEW DELEGATE FUNCTION
+
 extension SearchViewController: UITableViewDelegate {
     
+    /// This function conforms view controller to
+    /// UITableViewDelegate, allowing deleting
+    /// cells from list variable and table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             ingredients.removeSpecificIngredients(for: indexPath.row)

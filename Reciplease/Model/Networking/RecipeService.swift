@@ -9,7 +9,14 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
-class RecipeService {
+/// This class serves to call Api and
+/// fetch recipes.
+/// - Note that var session conforms
+/// to AlamofireSession protocol for testing purposes.
+/// When used in production, session is initialized by
+/// default with RecipeSession, which uses the
+/// real Alamofire.
+final class RecipeService {
     
     static let shared = RecipeService()
     var session: AlamofireSession
@@ -18,6 +25,11 @@ class RecipeService {
         self.session = session
     }
 
+    /// This function fetches recipes based on given ingredients.
+    /// - Parameter ingredients : A string value
+    /// reprensenting ingredients all serated by a comma.
+    /// - Parameter completion : a closure returning
+    /// a result type depending on success/failure
     func fetchRecipes(with ingredients: String, completion: @escaping (Result<RecipeData, NetworkError>) -> Void) {
         
         guard let url = getRecipeURL(query: ingredients) else {
@@ -45,6 +57,9 @@ class RecipeService {
 
     }
     
+    /// This functions return an optionnal URL
+    /// - Parameter query : A string value
+    /// reprensenting ingredients all serated by a comma.
     func getRecipeURL(query: String) -> URL? {
         var urlComponents = URLComponents()
         if query != "" {

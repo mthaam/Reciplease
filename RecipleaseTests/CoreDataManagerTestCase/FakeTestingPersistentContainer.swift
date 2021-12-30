@@ -12,7 +12,7 @@ import CoreData
 /// testing purposes.
 /// It also creates a fake viewContext used only for
 /// testing purposes.
-class FakeTestingPersistentContainer {
+final class FakeTestingPersistentContainer {
     
     // MARK: - CREATES  A DB MODEL
     static let modelName = "Reciplease"

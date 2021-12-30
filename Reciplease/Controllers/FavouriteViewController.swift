@@ -8,14 +8,26 @@
 import UIKit
 import CoreData
 
+// - MARK: CLASS
+
 class FavouriteViewController: UIViewController {
+    
+    // - MARK: PROPERTIES
     
     let coreDataManagement = FavouritesCoreDataManager.sharedFavoritesCoreDataManager
     var recipesToDisplay: [Recipe] = []
     var recipeToPrepareForSegue: Recipe!
     
+    // - MARK: OUTLETS
+    
     @IBOutlet weak var favsRecipeTableView: UITableView!
     @IBOutlet weak var nothingToShowLabel: UILabel!
+    
+}
+
+// - MARK: FUNCTIONS OVERRIDES
+
+extension FavouriteViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +42,22 @@ class FavouriteViewController: UIViewController {
         favsRecipeTableView.reloadData()
         hideTableViewIfNoFavorites()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToFavouriteRecipesViewController" {
+            let destinationVC = segue.destination as! FavouriteRecipesViewController
+            destinationVC.recipe = recipeToPrepareForSegue
+        }
+    }
+    
 }
+
+// - MARK: FUNCTIONS
 
 extension FavouriteViewController {
 
+    /// This function hides table view if
+    /// there are no recipes saved in core data.
     private func hideTableViewIfNoFavorites() {
         nothingToShowLabel.text = "Nothing to show yet. \nFind recipes and touch favorite button \nin recipe detail top right corner."
         if recipesToDisplay.count == 0 {
@@ -44,8 +67,9 @@ extension FavouriteViewController {
         }
     }
     
+    /// This function fetches recipes entities stored
+    /// in core data.
     private func retrieveRecipes() {
-        
         recipesToDisplay.removeAll()
         
         for recipe in coreDataManagement.all {
@@ -59,15 +83,25 @@ extension FavouriteViewController {
     
 }
 
+// - MARK: TABLE VIEW DATA SOURCE PROTOCOL FUNCTIONS
+
 extension FavouriteViewController: UITableViewDataSource {
+    
+    /// This function returns an Int value,
+    /// defining the number of sections within the
+    /// table view.
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    /// This function returns an Int value,
+    /// defining the number of rows in section.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipesToDisplay.count
     }
     
+    /// This function returns a UITableVIewCell,
+    /// containing an ingredient in list variable.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath) as? RecipeCellTableViewCell else {
             return UITableViewCell()
@@ -81,6 +115,8 @@ extension FavouriteViewController: UITableViewDataSource {
     }
 }
 
+// - MARK: TABLE VIEW DELEGATE FUNCTION
+
 extension FavouriteViewController: UITableViewDelegate {
     
     /// This function puts the recipe object corresponding
@@ -91,6 +127,9 @@ extension FavouriteViewController: UITableViewDelegate {
         performSegue(withIdentifier: "segueToFavouriteRecipesViewController", sender: nil)
     }
 
+    /// This function conforms view controller to
+    /// UITableViewDelegate, allowing deleting
+    /// cells from core data and table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let recipe = recipesToDisplay[indexPath.row]
@@ -107,16 +146,7 @@ extension FavouriteViewController: UITableViewDelegate {
     }
 }
 
-extension FavouriteViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFavouriteRecipesViewController" {
-            let destinationVC = segue.destination as! FavouriteRecipesViewController
-            destinationVC.recipe = recipeToPrepareForSegue
-        }
-    }
-    
-}
+// - MARK: ALERTS
 
 extension FavouriteViewController {
     

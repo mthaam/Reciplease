@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// This class manages the ingredients displayed in
+/// a recipe detail view controller.
 class RecipeDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ingredientLabel: UILabel!
@@ -15,6 +17,8 @@ class RecipeDetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
+    /// This function sets cell's label to
+    /// desired text.
     func configure(with ingredient: String) {
         ingredientLabel.text = ingredient
     }

@@ -8,15 +8,22 @@
 import XCTest
 @testable import Reciplease
 
+// - MARK: CLASS
+
 class FridgeIngredientsTests: XCTestCase {
     
+    // - MARK: PROPERTIES
+    
     var fridgeIngredients: FridgeIngredients!
+    
+    // - MARK: FUNCTIONS OVERRIDES
     
     override func setUp() {
         super.setUp()
         fridgeIngredients = FridgeIngredients()
     }
 
+    // - MARK: TESTING FUNCTIONS
     
     func testGivenListArrayIsEmpty_WhenAdding3Ingredients_ThenListArrayCountShouldBe3() {
         fridgeIngredients.addIngredients(with: "tofu, cream, pasta")

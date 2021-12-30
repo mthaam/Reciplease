@@ -9,6 +9,10 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
+/// This enum defines cases
+/// used when networking.
+/// It conforms to Error protocol,
+/// allowing to be used in result type.
 enum NetworkError: Error {
     case noData
     case noInputIngredients

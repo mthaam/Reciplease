@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - CLASS
+
 class FakeResponseData {
     
     // MARK: - Corrupted Json Data
@@ -15,6 +17,7 @@ class FakeResponseData {
             let url = bundle.url(forResource: "EdamamBadJsonData", withExtension: "json")!
             return try! Data(contentsOf: url)
         }
+    
     // MARK: - Correct Json Data
         static var recipeCorrectData: Data? {
             let bundle = Bundle(for: FakeResponseData.self)
@@ -22,6 +25,7 @@ class FakeResponseData {
             return try! Data(contentsOf: url)
         }
         static let recipeIncorrectData = "error".data(using: .utf8)!
+    
     // MARK: - Response
         static let responseOK = HTTPURLResponse(
             url: URL(string: "https://blob.com")!,
@@ -30,6 +34,7 @@ class FakeResponseData {
         static let responseKO = HTTPURLResponse(
             url: URL(string: "https://blob.com")!,
             statusCode: 500, httpVersion: nil, headerFields: [:])!
+    
     // MARK: - Error
         class RecipeError: Error {}
         static let recipeError = RecipeError()

@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// This class manages an ingredient cell
+/// in search view controller.
 class IngredientTableViewCell: UITableViewCell {
     
     @IBOutlet weak var coloredView: UIView!
@@ -18,10 +20,14 @@ class IngredientTableViewCell: UITableViewCell {
         setupCell()
     }
 
+    /// This function makes round corners
+    /// to cell
     private func setupCell() {
         coloredView.layer.cornerRadius = 10
     }
 
+    /// This function sets cell's label to
+    /// desired text.
     func configure(with ingredient: String) {
         ingredientLabel.text = ingredient
     }

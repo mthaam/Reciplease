@@ -7,10 +7,16 @@
 
 import Foundation
 
-class FridgeIngredients {
+/// This class manages ingredients shown in
+/// the ingredient list of search view controller
+final class FridgeIngredients {
 
     var list: [String] = []
     
+    /// This function adds ingredients to
+    /// list array.
+    /// - Parameter items: A string
+    /// value used to append list array
     func addIngredients(with items: String) {
         var elements: [String] {
             return items.split(separator: ",").map { "\($0)" }
@@ -32,10 +38,15 @@ class FridgeIngredients {
         list.remove(at: index)
     }
 
+    /// This function removes all
+    /// ingredients in list array.
     func removeAllIngredients() {
         list.removeAll()
     }
 
+    /// This function aggregates all ingredients
+    /// and  returns a string which is the result
+    /// of all strings stored in list array.
     func getAllIngredientsIntoOneString() -> String {
         var all = ""
         all = list.joined(separator: ",")
