@@ -27,6 +27,7 @@ class FavouriteRecipesViewController: UIViewController {
     @IBOutlet weak var greyView: UIView!
     @IBOutlet weak var blackView: UIView!
     @IBOutlet weak var favouriteStarIcon: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // - MARK: FUNCTIONS OVERRIDES
     
@@ -35,6 +36,7 @@ class FavouriteRecipesViewController: UIViewController {
         ingredientsTableView.dataSource = self
         updateLabels()
         makeRoundCornersToLikeAndCookingViews()
+        toggleActivityIndicator(shown: false)
     }
     
     // - MARK: @IBACTIONS
@@ -56,6 +58,7 @@ extension FavouriteRecipesViewController {
     /// to remove or save a recipe in core data
     /// based on star icon' color.
     private func removeOrSaveRecipe() {
+        toggleActivityIndicator(shown: true)
         if favouriteStarIcon.tintColor == .lightGray {
             saveRecipeObject()
         } else {
@@ -67,6 +70,7 @@ extension FavouriteRecipesViewController {
     /// class to save the recipe currently displayed.
     private func saveRecipeObject() {
         coreDataManagement.saveRecipeObject(with: recipe) { success in
+            toggleActivityIndicator(shown: false)
             if success {
                 favouriteStarIcon.tintColor = .recipleaseGreen
             } else {
@@ -80,6 +84,7 @@ extension FavouriteRecipesViewController {
     /// from core data management class.
     private func unsaveRecipeObject() {
         coreDataManagement.deleteRecipe(with: recipe) { success in
+            toggleActivityIndicator(shown: false)
             if success {
                 favouriteStarIcon.tintColor = .lightGray
             } else {
@@ -145,6 +150,11 @@ extension FavouriteRecipesViewController {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.2)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         recipeImage.layer.addSublayer(gradientLayer)
+    }
+
+    /// This function toggles activity indicator
+    private func toggleActivityIndicator(shown: Bool) {
+        activityIndicator.isHidden = !shown
     }
     
 }
