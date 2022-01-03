@@ -40,6 +40,11 @@ class RecipeViewController: UIViewController {
         makeRoundCornersToLikeAndCookingViews()
         toggleActivityIndicator(shown: false)
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIfRecipeIsAlreadyFavourite()
+    }
     
     // - MARK: @IBACTIONS
     
@@ -95,15 +100,16 @@ extension RecipeViewController {
             }
         }
     }
-
+    
     /// This function function checks if the recipe displayed
     /// is already a favourite and changes star icon' tint
     /// color if it is.
     private func checkIfRecipeIsAlreadyFavourite() {
-        for rec in coreDataManagement.all {
-            if let url = rec.url, url == recipe.url {
-                favouriteStarIcon.tintColor = .recipleaseGreen
-            }
+        let isFavourite = coreDataManagement.checkIfRecipeIsAlreadyFavourite(with: recipe)
+        if isFavourite {
+            favouriteStarIcon.tintColor = .recipleaseGreen
+        } else {
+            favouriteStarIcon.tintColor = .lightGray
         }
     }
     

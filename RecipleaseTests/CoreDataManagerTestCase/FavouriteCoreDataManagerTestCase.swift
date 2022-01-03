@@ -52,4 +52,17 @@ class FavouriteCoreDataManagerTestCase: XCTestCase {
         }
     }
     
+    func testGivenTwoRecipesAreStoredInCoreData_WhenCheckingIfOneIsAFavorite_CheckFunctionShouldReturnTrue() {
+        coreDataManager.saveRecipeObject(with: ExampleRecipeDataObjects.creamySweetSausage) { success in
+            XCTAssertTrue(coreDataManager.all.count == 1)
+        }
+        coreDataManager.saveRecipeObject(with: ExampleRecipeDataObjects.creamyScrambledEggs) { success in
+            XCTAssertTrue(coreDataManager.all.count == 2)
+        }
+        
+        let isFavourite = coreDataManager.checkIfRecipeIsAlreadyFavourite(with: ExampleRecipeDataObjects.creamySweetSausage)
+        
+        XCTAssertTrue(isFavourite)
+    }
+    
 }

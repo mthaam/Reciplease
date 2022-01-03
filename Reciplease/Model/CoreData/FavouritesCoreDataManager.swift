@@ -83,4 +83,14 @@ final class FavouritesCoreDataManager {
         completion(true)
         
     }
+    
+    func checkIfRecipeIsAlreadyFavourite(with recipe: Recipe) -> Bool {
+        var isFavourite = false
+        for rec in all {
+            if let url = rec.url, url == recipe.url {
+                isFavourite = true
+            }
+        }
+        return isFavourite
+    }
 }
