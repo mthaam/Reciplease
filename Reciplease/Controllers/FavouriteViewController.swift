@@ -44,8 +44,8 @@ extension FavouriteViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFavouriteRecipesViewController" {
-            let destinationVC = segue.destination as! FavouriteRecipesViewController
+        if segue.identifier == "segueToRecipeDetailFromFav" {
+            let destinationVC = segue.destination as! RecipeViewController
             destinationVC.recipe = recipeToPrepareForSegue
         }
     }
@@ -124,7 +124,7 @@ extension FavouriteViewController: UITableViewDelegate {
     /// and then performs segue to next VC.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         recipeToPrepareForSegue = recipesToDisplay[indexPath.row]
-        performSegue(withIdentifier: "segueToFavouriteRecipesViewController", sender: nil)
+        performSegue(withIdentifier: "segueToRecipeDetailFromFav", sender: nil)
     }
 
     /// This function conforms view controller to

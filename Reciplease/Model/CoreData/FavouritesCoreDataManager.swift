@@ -71,26 +71,27 @@ final class FavouritesCoreDataManager {
     func deleteRecipe(with recipeToDelete: Recipe!, completion: (Bool) -> Void) {
         let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
         
+        request.predicate = NSPredicate.init(format: "url == %@", recipeToDelete.url)
+    
         if let recipes = try? recipleaseContext.fetch(request) {
             for recipe in recipes {
-                if recipe.url == recipeToDelete.url {
-                    recipleaseContext.delete(recipe)
-                }
+                recipleaseContext.delete(recipe)
             }
         }
-        
-        try? recipleaseContext.save()
         completion(true)
         
     }
     
+    /// This functions returns a boolean,
+    /// if a recipe is already store in CD as favorite.
     func checkIfRecipeIsAlreadyFavourite(with recipe: Recipe) -> Bool {
-        var isFavourite = false
-        for rec in all {
-            if let url = rec.url, url == recipe.url {
-                isFavourite = true
+        let request: NSFetchRequest<RecipeObject> = RecipeObject.fetchRequest()
+        request.predicate = NSPredicate.init(format: "url == %@", recipe.url)
+        if let recipes = try? recipleaseContext.fetch(request) {
+            if recipes.count > 0 {
+                return true
             }
         }
-        return isFavourite
+        return false
     }
 }

@@ -65,4 +65,14 @@ class FavouriteCoreDataManagerTestCase: XCTestCase {
         XCTAssertTrue(isFavourite)
     }
     
+    func testGivenOneRecipeIsStoredInCoreData_WhenCheckingIfARecipeNOTStoredInCoreDataIsFavourite_CheckFunctionShouldReturnFalse() {
+        coreDataManager.saveRecipeObject(with: ExampleRecipeDataObjects.creamySweetSausage) { success in
+            XCTAssertTrue(coreDataManager.all.count == 1)
+        }
+        
+        let isFavourite = coreDataManager.checkIfRecipeIsAlreadyFavourite(with: ExampleRecipeDataObjects.creamyScrambledEggs)
+        
+        XCTAssertFalse(isFavourite)
+    }
+    
 }
